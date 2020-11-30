@@ -47,8 +47,10 @@ def get_icon_path(app):
         if cached_icons:
             cached_icons.sort()
             size = cached_icons[0]
+            name = icons[0]["value"]
+
             icon_path = (
-                f"{cdn_baseurl}/repo/appstream/x86_64/icons/{size}x{size}/{appid}.png"
+                f"{cdn_baseurl}/repo/appstream/x86_64/icons/{size}x{size}/{name}"
             )
             return icon_path
 
@@ -369,7 +371,6 @@ def search(userquery: str):
 
     # redisearch does not support fuzzy search for non-alphabet strings
     if userquery.isalpha():
-    if userquery.isalnum():
         generic_query = redisearch.Query(f"%{userquery}%").no_content()
     else:
         generic_query = redisearch.Query(userquery).no_content()
