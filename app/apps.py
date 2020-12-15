@@ -369,6 +369,7 @@ def search(userquery: str):
 
     # redisearch does not support fuzzy search for non-alphabet strings
     if userquery.isalpha():
+    if userquery.isalnum():
         generic_query = redisearch.Query(f"%{userquery}%").no_content()
     else:
         generic_query = redisearch.Query(userquery).no_content()
