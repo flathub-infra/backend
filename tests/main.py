@@ -93,20 +93,6 @@ def test_apps_by_non_existent_appid():
     assert response.status_code == 204
 
 
-def test_appstream_by_appid():
-    response = client.get("/appstream/org.sugarlabs.Maze")
-    assert response.status_code == 200
-    assert response.json() == get_expected_json_result("test_appstream_by_appid")
-
-
-def test_appstream_by_non_existent_appid():
-    response = client.get("/appstream/NonExistent")
-    assert response.status_code == 200
-    assert response.json() == get_expected_json_result(
-        "test_appstream_by_non_existent_appid"
-    )
-
-
 def test_search_query_by_appid():
     response = client.get("/apps/search/org.sugarlabs.Maze")
     assert response.status_code == 200
