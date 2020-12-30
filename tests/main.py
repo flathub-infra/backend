@@ -187,24 +187,6 @@ def test_feed_by_new():
     assert etree.tostring(feed) == etree.tostring(expected)
 
 
-def test_picked_apps():
-    response = client.get("/v2/picks/apps")
-    assert response.status_code == 200
-    assert response.json() == get_expected_json_result("test_picked_apps")
-
-
-def test_picked_games():
-    response = client.get("/v2/picks/games")
-    assert response.status_code == 200
-    assert response.json() == get_expected_json_result("test_picked_games")
-
-
-def test_picked_non_existent():
-    response = client.get("/v2/picks/NonExistent")
-    assert response.status_code == 200
-    assert response.json() == get_expected_json_result("test_picked_non_existent")
-
-
 def test_status():
     response = client.get("/status")
     assert response.status_code == 200
