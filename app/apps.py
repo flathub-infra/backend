@@ -326,14 +326,6 @@ def get_app(appid: str):
     return legacy_app
 
 
-def get_appid_appstream(appid: str, repo: str = "stable"):
-    app = utils.get_json_key(f"apps:{appid}")
-    if not app:
-        return []
-
-    return app
-
-
 def search(userquery: str):
     results = []
 

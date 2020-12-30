@@ -57,11 +57,6 @@ def get_app(appid: str, response: Response):
     return app
 
 
-@app.get("/appstream/{appid}")
-def get_appid_appstream(appid: str, repo: str = "stable"):
-    return apps.get_appid_appstream(appid, repo)
-
-
 @app.get("/apps/search/{userquery}")
 def search(userquery: str):
     return apps.search(userquery)
