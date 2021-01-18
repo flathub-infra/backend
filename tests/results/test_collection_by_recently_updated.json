@@ -5,7 +5,7 @@
     "name": "AnyDesk",
     "summary": "Connect to a computer remotely",
     "currentReleaseVersion": "6.0.1",
-    "currentReleaseDate": "2020-11-25",
+    "currentReleaseDate": "2021-01-18",
     "iconDesktopUrl": "https://dl.flathub.org/repo/appstream/x86_64/icons/128x128/com.anydesk.Anydesk.png",
     "iconMobileUrl": "https://dl.flathub.org/repo/appstream/x86_64/icons/128x128/com.anydesk.Anydesk.png"
   },
@@ -15,7 +15,7 @@
     "name": "WPS Office",
     "summary": "WPS Office Suite",
     "currentReleaseVersion": "11.1.0.9719",
-    "currentReleaseDate": "2020-10-28",
+    "currentReleaseDate": "2021-01-18",
     "iconDesktopUrl": "https://www.wps.com/assets/mediahub/WPS-Office-Mobile.png",
     "iconMobileUrl": "https://www.wps.com/assets/mediahub/WPS-Office-Mobile.png"
   },
@@ -25,7 +25,7 @@
     "name": "Maze",
     "summary": "A simple maze game",
     "currentReleaseVersion": "30",
-    "currentReleaseDate": "2020-05-11",
+    "currentReleaseDate": "2021-01-18",
     "iconDesktopUrl": "https://dl.flathub.org/repo/appstream/x86_64/icons/128x128/org.sugarlabs.Maze.png",
     "iconMobileUrl": "https://dl.flathub.org/repo/appstream/x86_64/icons/128x128/org.sugarlabs.Maze.png"
   }
