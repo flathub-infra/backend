@@ -3,6 +3,8 @@ import json
 import requests
 import struct
 import string
+from collections import defaultdict
+
 import gi
 import redisearch
 
@@ -124,6 +126,21 @@ def populate_build_dates():
     return len(recently_updated)
 
 
+def populate_arches():
+    arches = defaultdict(list)
+    flatpak = utils.Flatpak()
+
+    refs = flatpak.list_refs()
+    for ref in refs:
+        _, appid, arch, branch = ref.split('/')
+        arches[f"arches:{appid}"].append(arch)
+
+    for app in arches:
+        arches[app] = json.dumps(arches[app])
+
+    db.redis_conn.mset(arches)
+
+
 def initialize():
     apps = db.redis_conn.smembers("apps:index")
     if not apps:
@@ -143,6 +160,7 @@ def initialize():
 
 def update_apps(background_tasks):
     populate_build_dates()
+    populate_arches()
     return load_appstream()
 
 
@@ -231,3 +249,8 @@ def get_updated_at(appid: str):
         updated_at_ts = None
 
     return updated_at_ts
+
+
+def get_arches(appid: str):
+    arches = utils.get_json_key(f"arches:{appid}")
+    return arches

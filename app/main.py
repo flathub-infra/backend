@@ -29,6 +29,7 @@ def startup_event():
 def update_apps(background_tasks: BackgroundTasks):
     ret = apps.update_apps(background_tasks)
     picks.update()
+    apps.populate_arches()
 
     list_apps_summary.cache_clear()
     get_recently_updated.cache_clear()
@@ -91,3 +92,8 @@ def get_new_apps_feed():
 @app.get("/status", status_code=200)
 def healthcheck(response: Response):
     return {"status": "OK"}
+
+
+@app.get("/arches/{appid}")
+def get_arches(appid):
+    return apps.get_arches(appid)

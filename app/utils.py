@@ -13,7 +13,7 @@ from . import db
 class Flatpak:
     def __init__(self):
         self.run_command("remote-add", "--if-not-exists", "flathub", "https://flathub.org/repo/flathub.flatpakrepo")
-        self.remote_info("org.freedesktop.Platform//20.08")
+        self.remote_info("org.sugarlabs.Maze//stable")
 
     def run_command(self, *args):
         base_command = ["flatpak", "--user"]
