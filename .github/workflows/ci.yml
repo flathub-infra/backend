@@ -37,6 +37,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          sudo add-apt-repository -y ppa:alexlarsson/flatpak
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends build-essential flatpak gir1.2-ostree-1.0 libcairo2-dev libgirepository1.0-dev
 
