@@ -50,11 +50,11 @@ def list_apps_in_category(category: schemas.Category):
 
 @app.get("/apps/{appid}", status_code=status.HTTP_200_OK)
 def get_app(appid: str, response: Response):
-    app = apps.get_app(appid)
-    if not app:
-        response.status_code = status.HTTP_204_NO_CONTENT
+    if app := apps.get_app(appid):
+        return app
+    else:
+        response.status_code = status.HTTP_404_NOT_FOUND
         return response
-    return app
 
 
 @app.get("/apps/search/{userquery}")

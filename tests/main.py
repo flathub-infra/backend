@@ -92,7 +92,7 @@ def test_apps_by_appid():
 
 def test_apps_by_non_existent_appid():
     response = client.get("/apps/NonExistent")
-    assert response.status_code == 204
+    assert response.status_code == 404
 
 
 def test_search_query_by_appid():
