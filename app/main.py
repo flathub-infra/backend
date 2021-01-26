@@ -49,6 +49,11 @@ def list_apps_in_category(category: schemas.Category):
     return list_apps_summary(f"categories:{category}", appids=None, sort=True)
 
 
+@app.get("/appstream")
+def list_appstream():
+    return apps.list_appstream()
+
+
 @app.get("/appstream/{appid}")
 def get_appid_appstream(appid: str, repo: str = "stable"):
     return apps.get_appid_appstream(appid, repo)
