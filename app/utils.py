@@ -10,66 +10,6 @@ from . import config
 from . import db
 
 
-class Flatpak:
-    def __init__(self):
-        remote_add_cmd = [
-            "flatpak",
-            "--user",
-            "remote-add",
-            "--if-not-exists",
-            "flathub",
-            "https://flathub.org/repo/flathub.flatpakrepo",
-        ]
-        subprocess.run(
-            remote_add_cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
-        )
-
-        update_cache_cmd = [
-            "flatpak",
-            "--user",
-            "remote-info",
-            "flathub",
-            "org.freedesktop.Sdk//19.08",
-        ]
-        subprocess.run(
-            update_cache_cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
-        )
-
-    def remote_info(self, appid):
-        command = ["flatpak", "remote-info", "--user", "flathub", appid]
-        remote_info = subprocess.run(command, stdout=subprocess.PIPE)
-
-        if remote_info.returncode != 0:
-            return None
-
-        output = remote_info.stdout.decode("utf-8").replace("\xa0", " ")
-
-        info = {}
-        for line in output.split("\n"):
-            if ": " in line:
-                key, value = line.split(": ", 1)
-                info[key.lstrip()] = value.rstrip()
-
-        return info
-
-    def show_commit(self, appid):
-        command = [
-            "flatpak",
-            "--user",
-            "remote-info",
-            "--cached",
-            "--show-commit",
-            "flathub",
-            appid,
-        ]
-        show_commit = subprocess.run(command, stdout=subprocess.PIPE)
-
-        if show_commit.returncode != 0:
-            return None
-
-        return show_commit.stdout.decode("utf-8").rstrip()
-
-
 def appstream2dict(reponame: str):
     if config.settings.appstream_repos is not None:
         appstream_path = os.path.join(
@@ -161,13 +101,13 @@ def appstream2dict(reponame: str):
                     app["content_rating"][attr_name] = attr.text
             component.remove(content_rating)
 
-        custom = component.find("custom")
-        if custom is not None:
-            app["custom"] = {}
-            for value in custom:
+        metadata = component.find("metadata")
+        if metadata is not None:
+            app["metadata"] = {}
+            for value in metadata:
                 key = value.attrib.get("key")
-                app["custom"][key] = value.text
-            component.remove(custom)
+                app["metadata"][key] = value.text
+            component.remove(metadata)
 
         urls = component.findall("url")
         if len(urls):

@@ -1,7 +1,6 @@
 import sentry_sdk
 
 from functools import lru_cache
-from typing import Tuple
 
 from fastapi import status, Response, BackgroundTasks, FastAPI
 from sentry_sdk.integrations.asgi import SentryAsgiMiddleware
@@ -9,9 +8,11 @@ from sentry_sdk.integrations.asgi import SentryAsgiMiddleware
 from . import config
 from . import feeds
 from . import apps
-from . import flatpak
 from . import schemas
 from . import picks
+from . import utils
+from . import flatpak
+from . import db
 
 app = FastAPI()
 if config.settings.sentry_dsn:
@@ -21,32 +22,27 @@ if config.settings.sentry_dsn:
 
 @app.on_event("startup")
 def startup_event():
-    flatpak.initialize()
-    apps.initialize()
+    flatpak.Flatpak()
+    db.initialize()
 
 
 @app.post("/update")
 def update_apps(background_tasks: BackgroundTasks):
-    ret = apps.update_apps(background_tasks)
+    ret = apps.load_appstream()
+    apps.populate_build_dates()
     picks.update()
 
-    list_apps_summary.cache_clear()
+    list_apps_in_category.cache_clear()
     get_recently_updated.cache_clear()
 
     return ret
 
 
+# TODO: should be paginated
 @lru_cache()
-def list_apps_summary(
-    index: str = "apps:index", appids: Tuple[str, ...] = None, sort: bool = True
-):
-    ret = apps.list_apps_summary(index, appids, sort)
-    return ret
-
-
 @app.get("/category/{category}")
 def list_apps_in_category(category: schemas.Category):
-    return list_apps_summary(f"categories:{category}", appids=None, sort=True)
+    return apps.list_apps_summary(f"categories:{category}", appids=None, sort=True)
 
 
 @app.get("/appstream")
@@ -66,7 +62,12 @@ def get_updated_at(appid: str):
 
 @app.get("/search/{userquery}")
 def search(userquery: str):
-    return apps.search(userquery)
+    results = db.search(userquery)
+    if results:
+        appids = tuple(doc_id.replace("fts", "apps") for doc_id in results)
+        return apps.list_apps_summary(appids=appids, sort=False)
+    else:
+        return []
 
 
 @app.get("/collection/recently-updated")
