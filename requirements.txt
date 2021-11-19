@@ -18,7 +18,7 @@ rmtest==0.7.0
 sentry-sdk==0.19.1
 six==1.15.0
 starlette==0.13.6
-urllib3==1.25.11
+urllib3==1.26.5
 uvicorn==0.12.2
 httptools==0.1.1
 pytest==6.1.2
