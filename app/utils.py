@@ -7,7 +7,7 @@ import requests
 from . import config
 
 
-def appstream2dict(reponame: str):
+def appstream2dict(reponame: str) -> dict[str, object]:
     if config.settings.appstream_repos is not None:
         appstream_path = os.path.join(
             config.settings.appstream_repos,

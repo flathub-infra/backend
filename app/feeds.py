@@ -4,17 +4,27 @@ from feedgen.feed import FeedGenerator
 from . import db
 
 
-def generate_feed(key: str, title: str, description: str, link: str):
+def generate_feed(
+    key: str,
+    title: str,
+    description: str,
+    link: str,
+    repo: str,
+):
     feed = FeedGenerator()
     feed.title(title)
     feed.description(description)
     feed.link(href=link)
     feed.language("en")
 
-    appids = db.redis_conn.zrevrange(key, 0, 10, withscores=True)
-    apps = [(db.get_json_key(f"apps:{appid[0]}"), appid[1]) for appid in appids]
+    # get 15, as we might have some that don't exist, due to summary knowing about consale-applications
+    appids = db.redis_conn.zrevrange(key, 0, 15, withscores=True)
+    app_score_tuple = [
+        (db.get_json_key(f"apps:{appid[0]}"), appid[1]) for appid in appids
+    ]
+    apps = [(item[0][repo], item[1]) for item in app_score_tuple if item[0] is not None]
 
-    for app, timestamp in reversed(apps):
+    for app, timestamp in reversed(apps[:10]):
         if not app.get("name"):
             continue
 
@@ -29,9 +39,7 @@ def generate_feed(key: str, title: str, description: str, link: str):
         entry.pubDate(f"{entry_date} UTC")
 
         content = [
-            '<img src="https://dl.flathub.org/repo/appstream/x86_64/icons/128x128/{}.png">'.format(
-                app["id"]
-            ),
+            '<img src="{}">'.format(app["icon"]),
             f"<p>{app['summary']}</p>",
             f"<p>{app['description']}</p>",
             "<h3>Additional information:</h3>",
@@ -63,19 +71,21 @@ def generate_feed(key: str, title: str, description: str, link: str):
     return feed.rss_str()
 
 
-def get_recently_updated_apps_feed():
+def get_recently_updated_apps_feed(repo: str = "stable"):
     return generate_feed(
-        "recently_updated_zset",
+        "recently_updated_zset" if repo == "stable" else "recently_updated_beta_zset",
         "Flathub – recently updated applications",
         "Recently updated applications published on Flathub",
         "https://flathub.org/apps/collection/recently-updated",
+        repo,
     )
 
 
-def get_new_apps_feed():
+def get_new_apps_feed(repo: str = "stable"):
     return generate_feed(
-        "new_apps_zset",
+        "new_apps_zset" if repo == "stable" else "new_apps_beta_zset",
         "Flathub – recently added applications",
         "Applications recently published on Flathub",
         "https://flathub.org/apps/collection/new",
+        repo,
     )

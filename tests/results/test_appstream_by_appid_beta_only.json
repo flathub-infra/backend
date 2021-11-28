@@ -1,0 +1,56 @@
+{
+  "beta": {
+    "description": "Developers, Developers, Developers, Developers",
+    "screenshots": [
+      {
+        "624x351": "https://dl.flathub.org/repo/screenshots/com.only.in.beta.Repo-stable/624x351/com.only.in.beta.Repo-4308958995b5f213eac85c7053e01a33.png",
+        "112x63": "https://dl.flathub.org/repo/screenshots/com.only.in.beta.Repo-stable/112x63/com.only.in.beta.Repo-4308958995b5f213eac85c7053e01a33.png",
+        "224x126": "https://dl.flathub.org/repo/screenshots/com.only.in.beta.Repo-stable/224x126/com.only.in.beta.Repo-4308958995b5f213eac85c7053e01a33.png",
+        "752x423": "https://dl.flathub.org/repo/screenshots/com.only.in.beta.Repo-stable/752x423/com.only.in.beta.Repo-4308958995b5f213eac85c7053e01a33.png"
+      },
+      {
+        "624x351": "https://dl.flathub.org/repo/screenshots/com.only.in.beta.Repo-stable/624x351/com.only.in.beta.Repo-0cf71487936dec29c5b092662909f125.png",
+        "112x63": "https://dl.flathub.org/repo/screenshots/com.only.in.beta.Repo-stable/112x63/com.only.in.beta.Repo-0cf71487936dec29c5b092662909f125.png",
+        "224x126": "https://dl.flathub.org/repo/screenshots/com.only.in.beta.Repo-stable/224x126/com.only.in.beta.Repo-0cf71487936dec29c5b092662909f125.png",
+        "752x423": "https://dl.flathub.org/repo/screenshots/com.only.in.beta.Repo-stable/752x423/com.only.in.beta.Repo-0cf71487936dec29c5b092662909f125.png"
+      },
+      {
+        "624x351": "https://dl.flathub.org/repo/screenshots/com.only.in.beta.Repo-stable/624x351/com.only.in.beta.Repo-5d288daae5069cde2ffe86ab4a9285a7.png",
+        "112x63": "https://dl.flathub.org/repo/screenshots/com.only.in.beta.Repo-stable/112x63/com.only.in.beta.Repo-5d288daae5069cde2ffe86ab4a9285a7.png",
+        "224x126": "https://dl.flathub.org/repo/screenshots/com.only.in.beta.Repo-stable/224x126/com.only.in.beta.Repo-5d288daae5069cde2ffe86ab4a9285a7.png",
+        "752x423": "https://dl.flathub.org/repo/screenshots/com.only.in.beta.Repo-stable/752x423/com.only.in.beta.Repo-5d288daae5069cde2ffe86ab4a9285a7.png"
+      }
+    ],
+    "releases": [
+      {
+        "timestamp": "1582070400",
+        "version": "30"
+      }
+    ],
+    "content_rating": {
+      "type": "oars-1.1"
+    },
+    "icon": "https://dl.flathub.org/repo/appstream/x86_64/icons/128x128/com.only.in.beta.Repo.png",
+    "id": "com.only.in.beta.Repo",
+    "translation": {
+      "value": "com.only.in.beta.Repo",
+      "type": "gettext"
+    },
+    "name": "Beta app",
+    "summary": "A simple beta test app",
+    "developer_name": "Developer",
+    "categories": ["Game"],
+    "kudos": ["HiDpiIcon"],
+    "project_license": "GPL-3.0-or-later",
+    "launchable": {
+      "value": "com.only.in.beta.Repo.desktop",
+      "type": "desktop-id"
+    },
+    "bundle": {
+      "value": "app/com.only.in.beta.Repo/x86_64/stable",
+      "type": "flatpak",
+      "runtime": "org.gnome.Platform/x86_64/3.36",
+      "sdk": "org.gnome.Sdk/x86_64/3.36"
+    }
+  }
+}
