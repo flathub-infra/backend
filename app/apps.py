@@ -21,6 +21,7 @@ def load_appstream():
         for appid in apps:
             redis_key = f"apps:{appid}"
 
+            # only add desktop apps to the search index
             if apps[appid].get("type") == "desktop":
                 clean_html_re = re.compile("<.*?>")
                 search_description = re.sub(
