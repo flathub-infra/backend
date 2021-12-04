@@ -14,10 +14,12 @@ def load_appstream():
     current_apps = db.get_apps("stable")
     current_apps_beta = db.get_apps("beta")
     current_categories = db.redis_conn.smembers("categories:index")
+    current_developers = db.redis_conn.smembers("developers:index")
 
     db.initialize()
     with db.redis_conn.pipeline() as p:
         p.delete("categories:index", *current_categories)
+        p.delete("developers:index", *current_developers)
 
         for appid in apps:
             redis_key = f"apps:{appid}"
@@ -45,6 +47,10 @@ def load_appstream():
                     for category in categories:
                         p.sadd("categories:index", category)
                         p.sadd(f"categories:{category}", redis_key)
+
+                if developer_name := apps[appid]["stable"].get("developer_name"):
+                    p.sadd("developers:index", developer_name)
+                    p.sadd(f"developers:{developer_name}", redis_key)
 
             p.set(f"apps:{appid}", json.dumps(apps[appid]))
 
@@ -108,7 +114,17 @@ def get_category(category: str, repo: str = "stable"):
 
         return [(app[repo]["id"]) for app in appdata if repo in app]
     else:
-        return []
+        return None
+
+
+def get_developer(developer: str, repo: str = "stable"):
+    if index := db.redis_conn.smembers(f"developers:{developer}"):
+        json_appdata = db.redis_conn.mget(index)
+        appdata = [json.loads(app) for app in json_appdata]
+
+        return [(app[repo]["id"]) for app in appdata if repo in app]
+    else:
+        return None
 
 
 def search(query: str, repo: str = "stable"):

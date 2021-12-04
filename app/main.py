@@ -47,8 +47,38 @@ def update():
 
 
 @app.get("/category/{category}")
-def get_category(category: schemas.Category):
+def get_category(
+    category: schemas.Category,
+):
     ids = apps.get_category(category)
+
+    downloads = stats.get_downloads_by_ids(ids)
+    sorted_ids = sorted(
+        ids,
+        key=lambda appid: downloads.get(appid, {"downloads_last_month": 0}).get(
+            "downloads_last_month", 0
+        ),
+        reverse=True,
+    )
+
+    return sorted_ids
+
+
+@app.get("/developer/")
+def get_developers():
+    return db.get_developers()
+
+
+@app.get("/developer/{developer}")
+def get_developer(
+    developer: str,
+    response: Response,
+):
+    ids = apps.get_developer(developer)
+
+    if not ids:
+        response.status_code = 404
+        return response
 
     downloads = stats.get_downloads_by_ids(ids)
     sorted_ids = sorted(
@@ -112,13 +142,16 @@ def get_popular_days(days: int):
 @app.get("/feed/recently-updated")
 def get_recently_updated_apps_feed(type: schemas.AppstreamType = "stable"):
     return Response(
-        content=feeds.get_recently_updated_apps_feed(type), media_type="application/rss+xml"
+        content=feeds.get_recently_updated_apps_feed(type),
+        media_type="application/rss+xml",
     )
 
 
 @app.get("/feed/new")
 def get_new_apps_feed(type: schemas.AppstreamType = "stable"):
-    return Response(content=feeds.get_new_apps_feed(type), media_type="application/rss+xml")
+    return Response(
+        content=feeds.get_new_apps_feed(type), media_type="application/rss+xml"
+    )
 
 
 @app.get("/status", status_code=200)

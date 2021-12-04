@@ -146,3 +146,7 @@ def get_apps(repo: str = "stable"):
     elif repo == "beta":
         apps = {app[5:] for app in redis_conn.smembers("apps:index_beta")}
         return apps
+
+
+def get_developers():
+    return {developer for developer in redis_conn.smembers("developers:index")}
