@@ -1,6 +1,6 @@
 {
   "beta": {
-    "description": "Developers, Developers, Developers, Developers",
+    "description": "<p>Developers, Developers, Developers, Developers</p>",
     "screenshots": [
       {
         "624x351": "https://dl.flathub.org/repo/screenshots/com.only.in.beta.Repo-stable/624x351/com.only.in.beta.Repo-4308958995b5f213eac85c7053e01a33.png",
@@ -39,8 +39,12 @@
     "name": "Beta app",
     "summary": "A simple beta test app",
     "developer_name": "Developer",
-    "categories": ["Game"],
-    "kudos": ["HiDpiIcon"],
+    "categories": [
+      "Game"
+    ],
+    "kudos": [
+      "HiDpiIcon"
+    ],
     "project_license": "GPL-3.0-or-later",
     "launchable": {
       "value": "com.only.in.beta.Repo.desktop",

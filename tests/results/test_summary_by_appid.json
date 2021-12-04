@@ -1,5 +1,5 @@
 {
-  "stable": {
+  "beta": {
     "arches": ["x86_64"],
     "timestamp": 1610973680,
     "download_size": 1024,
@@ -11,7 +11,7 @@
       "permissions": {}
     }
   },
-  "beta": {
+  "stable": {
     "arches": ["x86_64"],
     "timestamp": 1610973680,
     "download_size": 1024,

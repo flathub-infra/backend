@@ -80,23 +80,50 @@
       }
     ],
     "content_rating": {
-      "type": "oars-1.1"
+      "drugs-alcohol": "none",
+      "drugs-narcotics": "none",
+      "drugs-tobacco": "none",
+      "language-discrimination": "none",
+      "language-humor": "none",
+      "language-profanity": "none",
+      "money-gambling": "none",
+      "money-purchasing": "none",
+      "sex-adultery": "none",
+      "sex-appearance": "none",
+      "sex-homosexuality": "none",
+      "sex-nudity": "none",
+      "sex-prostitution": "none",
+      "sex-themes": "none",
+      "social-audio": "none",
+      "social-chat": "intense",
+      "social-contacts": "none",
+      "social-info": "none",
+      "social-location": "none",
+      "type": "oars-1.1",
+      "violence-bloodshed": "none",
+      "violence-cartoon": "none",
+      "violence-desecration": "none",
+      "violence-fantasy": "none",
+      "violence-realistic": "none",
+      "violence-sexual": "none",
+      "violence-slavery": "none",
+      "violence-worship": "none"
     },
     "urls": {
       "bugtracker": "https://github.com/flathub/com.anydesk.Anydesk/issues",
       "homepage": "https://www.anydesk.com"
     },
-    "icon": "https://lh3.googleusercontent.com/bpm79oQCS4VMwIG-jajHfpsIhsUodP5fHDa3V2cMXLiwkSscAAviezm9YlmSxgjkB-A=w128",
+    "icon": "https://dl.flathub.org/repo/appstream/x86_64/icons/128x128/com.anydesk.Anydesk.png",
     "id": "com.anydesk.Anydesk",
-    "translation": {
-      "value": "com.anydesk.Anydesk",
-      "type": "gettext"
-    },
     "name": "AnyDesk",
     "summary": "Connect to a computer remotely",
     "developer_name": "AnyDesk Software GmbH",
-    "categories": ["Network"],
-    "kudos": ["HiDpiIcon"],
+    "categories": [
+      "Network"
+    ],
+    "kudos": [
+      "HiDpiIcon"
+    ],
     "project_license": "LicenseRef-proprietary",
     "launchable": {
       "value": "com.anydesk.Anydesk.desktop",
@@ -107,6 +134,9 @@
       "type": "flatpak",
       "runtime": "org.freedesktop.Platform/x86_64/20.08",
       "sdk": "org.freedesktop.Sdk/x86_64/20.08"
+    },
+    "metadata": {
+      "X-Flatpak-Tags": "proprietary"
     }
   }
 }

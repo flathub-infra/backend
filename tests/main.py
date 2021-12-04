@@ -40,7 +40,6 @@ def setup_module():
 
     installation_path = os.path.join(workspace.name, "flatpak")
     repo_path = os.path.join(installation_path, "repo")
-    beta_repo_path = os.path.join(installation_path, "beta-repo")
 
     os.mkdir(installation_path)
     os.environ["FLATPAK_USER_DIR"] = installation_path
@@ -50,12 +49,7 @@ def setup_module():
     repo.create(OSTree.RepoMode.BARE, None)
     remote_path = os.path.join(os.getcwd(), "tests/ostree/repo")
     repo.remote_add("flathub", f"file://{remote_path}")
-
-    beta_file = Gio.File.new_for_path(beta_repo_path)
-    beta_repo = OSTree.Repo.new(beta_file)
-    beta_repo.create(OSTree.RepoMode.BARE, None)
-    beta_remote_path = os.path.join(os.getcwd(), "tests/ostree/beta-repo")
-    beta_repo.remote_add("flathub-beta", f"file://{beta_remote_path}")
+    repo.remote_add("flathub-beta", f"file://{remote_path}")
 
     for i, test_stats_json in enumerate(
         sorted(glob.glob("tests/stats/*.json"), reverse=True)
@@ -107,13 +101,17 @@ def test_appstream_by_appid():
 def test_appstream_by_appid_stable_only():
     response = client.get("/appstream/com.anydesk.Anydesk")
     assert response.status_code == 200
-    assert response.json() == _get_expected_json_result("test_appstream_by_appid_stable_only")
+    assert response.json() == _get_expected_json_result(
+        "test_appstream_by_appid_stable_only"
+    )
 
 
 def test_appstream_by_appid_beta_only():
     response = client.get("/appstream/com.only.in.beta.Repo")
     assert response.status_code == 200
-    assert response.json() == _get_expected_json_result("test_appstream_by_appid_beta_only")
+    assert response.json() == _get_expected_json_result(
+        "test_appstream_by_appid_beta_only"
+    )
 
 
 def test_appstream_by_non_existent_appid():
@@ -265,13 +263,17 @@ def test_summary_by_appid():
 def test_summary_by_appid_stable_only():
     response = client.get("/summary/com.anydesk.Anydesk")
     assert response.status_code == 200
-    assert response.json() == _get_expected_json_result("test_summary_by_appid_stable_only")
+    assert response.json() == _get_expected_json_result(
+        "test_summary_by_appid_stable_only"
+    )
 
 
 def test_summary_by_appid_beta_only():
     response = client.get("/summary/com.only.in.beta.Repo")
     assert response.status_code == 200
-    assert response.json() == _get_expected_json_result("test_summary_by_appid_beta_only")
+    assert response.json() == _get_expected_json_result(
+        "test_summary_by_appid_beta_only"
+    )
 
 
 def test_summary_by_non_existent_id():

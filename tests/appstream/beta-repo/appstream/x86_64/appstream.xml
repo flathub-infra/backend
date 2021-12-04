@@ -117,7 +117,7 @@
     <name>Beta app</name>
     <summary>A simple beta test app</summary>
     <developer_name>Developer</developer_name>
-    <description>Developers, Developers, Developers, Developers</description>
+    <description><p>Developers, Developers, Developers, Developers</p></description>
     <icon type="cached" height="64" width="64">com.only.in.beta.Repo.png</icon>
     <icon type="cached" height="128" width="128">com.only.in.beta.Repo.png</icon>
     <categories>

@@ -1,5 +1,5 @@
 {
-  "stable": {
+  "beta": {
     "description": "<p>Good at finding your way out of hard situations? Let's see! Try to make your way through an increasingly difficult path.</p>",
     "screenshots": [
       {
@@ -57,7 +57,7 @@
       "sdk": "org.gnome.Sdk/x86_64/3.36"
     }
   },
-  "beta": {
+  "stable": {
     "description": "<p>Good at finding your way out of hard situations? Let's see! Try to make your way through an increasingly difficult path.</p>",
     "screenshots": [
       {
@@ -99,7 +99,7 @@
       "type": "gettext"
     },
     "name": "Maze",
-    "summary": "A simple maze game, but this is the beta version",
+    "summary": "A simple maze game",
     "developer_name": "Sugar Labs Community",
     "categories": ["Game"],
     "kudos": ["HiDpiIcon"],

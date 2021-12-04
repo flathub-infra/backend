@@ -91,21 +91,8 @@ def parse_metadata(ini: str):
 
 
 def update():
-    repo_file = Gio.File.new_for_path(f"{config.settings.flatpak_user_dir}/repo")
-    repo = OSTree.Repo.new(repo_file)
-    repo.open(None)
-
-    status, summary, signatures = repo.remote_fetch_summary("flathub", None)
-    data = GLib.Variant.new_from_bytes(
-        GLib.VariantType.new(OSTree.SUMMARY_GVARIANT_STRING), summary, True
-    )
-
-    status_beta, summary_beta, signatures_beta = repo.remote_fetch_summary(
-        "flathub-beta", None
-    )
-    data_beta = GLib.Variant.new_from_bytes(
-        GLib.VariantType.new(OSTree.SUMMARY_GVARIANT_STRING), summary_beta, True
-    )
+    data = get_summary_data("flathub")
+    data_beta = get_summary_data("flathub-beta")
 
     summary_dict, recently_updated_zset = parse_summary_data(data)
     summary_dict_beta, recently_updated_beta_zset = parse_summary_data(data_beta)
@@ -118,6 +105,19 @@ def update():
     )
 
     return len(recently_updated_zset), len(recently_updated_beta_zset)
+
+
+def get_summary_data(remote_name):
+    repo_file = Gio.File.new_for_path(f"{config.settings.flatpak_user_dir}/repo")
+    repo = OSTree.Repo.new(repo_file)
+    repo.open(None)
+
+    status, summary, signatures = repo.remote_fetch_summary(remote_name, None)
+    data = GLib.Variant.new_from_bytes(
+        GLib.VariantType.new(OSTree.SUMMARY_GVARIANT_STRING), summary, True
+    )
+
+    return data
 
 
 def parse_summary_data(data):
