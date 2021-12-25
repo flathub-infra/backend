@@ -96,13 +96,24 @@ def get_category(category: str):
 
 
 def get_addons(appid: str):
+    result = []
+    if summary := db.get_json_key(f"summary:{appid}"):
+        extension_ids = list(summary["metadata"]["extensions"].keys())
+
+        apps = list_appstream(type="addon")
+
+        for app in apps:
+            for extension_id in extension_ids:
+                if app.startswith(extension_id):
+                    result.append(app)
+
     if index := db.redis_conn.smembers(f"addons:{appid}"):
         json_appdata = db.redis_conn.mget(index)
         appdata = [json.loads(app) for app in json_appdata]
 
-        return [(app["id"]) for app in appdata]
-    else:
-        return []
+        result.append((app["id"]) for app in appdata)
+
+    return result
 
 
 def search(query: str):

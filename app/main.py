@@ -60,10 +60,12 @@ def get_addons(appid: str):
 
     addon_appstreams = defaultdict()
     for addonid in ids:
-        addon_appstreams[addonid] = db.get_json_key(f"apps:{addonid}")
+        if addon := db.get_json_key(f"apps:{addonid}"):
+            addon_appstreams[addonid] = addon
+
     sorted_ids = sorted(
         ids,
-        key=lambda appid: addon_appstreams[appid].get("name", "Unknown"),
+        key=lambda appid: addon_appstreams.get(appid, {}).get("name", "Unknown"),
     )
 
     return sorted_ids
