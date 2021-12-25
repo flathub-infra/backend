@@ -1,0 +1,142 @@
+{
+  "stable": {
+    "description": "<p>AnyDesk ensures secure and reliable remote desktop connections for IT professionals and on-the-go individuals alike.</p><p>NOTE: This wrapper is not verified by, affiliated with, or supported by AnyDesk.</p>",
+    "screenshots": [
+      {
+        "624x351": "https://dl.flathub.org/repo/screenshots/com.anydesk.Anydesk-stable/624x351/com.anydesk.Anydesk-b8f4a58c33a1e1603bad8a835f244173.png",
+        "112x63": "https://dl.flathub.org/repo/screenshots/com.anydesk.Anydesk-stable/112x63/com.anydesk.Anydesk-b8f4a58c33a1e1603bad8a835f244173.png",
+        "224x126": "https://dl.flathub.org/repo/screenshots/com.anydesk.Anydesk-stable/224x126/com.anydesk.Anydesk-b8f4a58c33a1e1603bad8a835f244173.png",
+        "752x423": "https://dl.flathub.org/repo/screenshots/com.anydesk.Anydesk-stable/752x423/com.anydesk.Anydesk-b8f4a58c33a1e1603bad8a835f244173.png"
+      }
+    ],
+    "releases": [
+      {
+        "timestamp": "1598313600",
+        "version": "6.0.1"
+      },
+      {
+        "timestamp": "1595894400",
+        "version": "6.0.0"
+      },
+      {
+        "timestamp": "1588896000",
+        "version": "5.5.6"
+      },
+      {
+        "timestamp": "1587340800",
+        "version": "5.5.5"
+      },
+      {
+        "timestamp": "1582588800",
+        "version": "5.5.4"
+      },
+      {
+        "timestamp": "1582243200",
+        "version": "5.5.3"
+      },
+      {
+        "timestamp": "1581897600",
+        "version": "5.5.2"
+      },
+      {
+        "timestamp": "1575331200",
+        "version": "5.5.1"
+      },
+      {
+        "timestamp": "1574035200",
+        "version": "5.5.0"
+      },
+      {
+        "timestamp": "1572480000",
+        "version": "5.4.1"
+      },
+      {
+        "timestamp": "1571875200",
+        "version": "5.4.0"
+      },
+      {
+        "timestamp": "1566345600",
+        "version": "5.1.2"
+      },
+      {
+        "timestamp": "1560384000",
+        "version": "5.1.1"
+      },
+      {
+        "timestamp": "1541721600",
+        "version": "4.0.1"
+      },
+      {
+        "timestamp": "1537142400",
+        "version": "4.0.0"
+      },
+      {
+        "timestamp": "1528934400",
+        "version": "2.9.6"
+      },
+      {
+        "timestamp": "1505347200",
+        "version": "2.9.5"
+      }
+    ],
+    "content_rating": {
+      "drugs-alcohol": "none",
+      "drugs-narcotics": "none",
+      "drugs-tobacco": "none",
+      "language-discrimination": "none",
+      "language-humor": "none",
+      "language-profanity": "none",
+      "money-gambling": "none",
+      "money-purchasing": "none",
+      "sex-adultery": "none",
+      "sex-appearance": "none",
+      "sex-homosexuality": "none",
+      "sex-nudity": "none",
+      "sex-prostitution": "none",
+      "sex-themes": "none",
+      "social-audio": "none",
+      "social-chat": "intense",
+      "social-contacts": "none",
+      "social-info": "none",
+      "social-location": "none",
+      "type": "oars-1.1",
+      "violence-bloodshed": "none",
+      "violence-cartoon": "none",
+      "violence-desecration": "none",
+      "violence-fantasy": "none",
+      "violence-realistic": "none",
+      "violence-sexual": "none",
+      "violence-slavery": "none",
+      "violence-worship": "none"
+    },
+    "urls": {
+      "bugtracker": "https://github.com/flathub/com.anydesk.Anydesk/issues",
+      "homepage": "https://www.anydesk.com"
+    },
+    "icon": "https://dl.flathub.org/repo/appstream/x86_64/icons/128x128/com.anydesk.Anydesk.png",
+    "id": "com.anydesk.Anydesk",
+    "name": "AnyDesk",
+    "summary": "Connect to a computer remotely",
+    "developer_name": "AnyDesk Software GmbH",
+    "categories": [
+      "Network"
+    ],
+    "kudos": [
+      "HiDpiIcon"
+    ],
+    "project_license": "LicenseRef-proprietary",
+    "launchable": {
+      "value": "com.anydesk.Anydesk.desktop",
+      "type": "desktop-id"
+    },
+    "bundle": {
+      "value": "app/com.anydesk.Anydesk/x86_64/stable",
+      "type": "flatpak",
+      "runtime": "org.freedesktop.Platform/x86_64/20.08",
+      "sdk": "org.freedesktop.Sdk/x86_64/20.08"
+    },
+    "metadata": {
+      "X-Flatpak-Tags": "proprietary"
+    }
+  }
+}

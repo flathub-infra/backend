@@ -49,6 +49,7 @@ def setup_module():
     repo.create(OSTree.RepoMode.BARE, None)
     remote_path = os.path.join(os.getcwd(), "tests/ostree/repo")
     repo.remote_add("flathub", f"file://{remote_path}")
+    repo.remote_add("flathub-beta", f"file://{remote_path}")
 
     for i, test_stats_json in enumerate(
         sorted(glob.glob("tests/stats/*.json"), reverse=True)
@@ -91,10 +92,37 @@ def test_apps_by_non_existent_category():
     assert response.status_code == 422
 
 
+def test_apps_by_developer():
+    response = client.get("/developer/Sugar Labs Community")
+    assert response.status_code == 200
+    assert response.json() == _get_expected_json_result("test_apps_by_developer")
+
+
+def test_apps_by_non_existent_developer():
+    response = client.get("/developer/NonExistent")
+    assert response.status_code == 404
+
+
 def test_appstream_by_appid():
     response = client.get("/appstream/org.sugarlabs.Maze")
     assert response.status_code == 200
     assert response.json() == _get_expected_json_result("test_appstream_by_appid")
+
+
+def test_appstream_by_appid_stable_only():
+    response = client.get("/appstream/com.anydesk.Anydesk")
+    assert response.status_code == 200
+    assert response.json() == _get_expected_json_result(
+        "test_appstream_by_appid_stable_only"
+    )
+
+
+def test_appstream_by_appid_beta_only():
+    response = client.get("/appstream/com.only.in.beta.Repo")
+    assert response.status_code == 200
+    assert response.json() == _get_expected_json_result(
+        "test_appstream_by_appid_beta_only"
+    )
 
 
 def test_appstream_by_non_existent_appid():
@@ -217,10 +245,46 @@ def test_list_appstream():
     assert response.json() == _get_expected_json_result("test_list_appstream")
 
 
-def test_summary_by_id():
+def test_list_appstream_explicit_stable():
+    response = client.get("/appstream?type=stable")
+    assert response.status_code == 200
+    assert response.json() == _get_expected_json_result("test_list_appstream")
+
+
+def test_list_appstream_beta():
+    response = client.get("/appstream?type=beta")
+    assert response.status_code == 200
+    assert response.json() == _get_expected_json_result("test_list_appstream_beta")
+
+
+def test_list_appstream_beta():
+    response = client.get("/appstream?type=stable_and_beta")
+    assert response.status_code == 200
+    assert response.json() == _get_expected_json_result(
+        "test_list_appstream_stable_and_beta"
+    )
+
+
+def test_summary_by_appid():
     response = client.get("/summary/org.sugarlabs.Maze")
     assert response.status_code == 200
     assert response.json() == _get_expected_json_result("test_summary_by_appid")
+
+
+def test_summary_by_appid_stable_only():
+    response = client.get("/summary/com.anydesk.Anydesk")
+    assert response.status_code == 200
+    assert response.json() == _get_expected_json_result(
+        "test_summary_by_appid_stable_only"
+    )
+
+
+def test_summary_by_appid_beta_only():
+    response = client.get("/summary/com.only.in.beta.Repo")
+    assert response.status_code == 200
+    assert response.json() == _get_expected_json_result(
+        "test_summary_by_appid_beta_only"
+    )
 
 
 def test_summary_by_non_existent_id():

@@ -126,5 +126,27 @@ def get_json_key(key: str):
     return None
 
 
-def get_app_count():
-    return redis_conn.scard("apps:index")
+def get_app_count(repo: str = "stable") -> int:
+    if repo == "stable_and_beta":
+        return len(get_apps(repo))
+    if repo == "stable":
+        return redis_conn.scard("apps:index")
+    if repo == "beta":
+        return redis_conn.scard("apps:index_beta")
+
+
+def get_apps(repo: str = "stable"):
+    if repo == "stable_and_beta":
+        apps = {app[5:] for app in redis_conn.smembers("apps:index")}
+        apps_beta = {app[5:] for app in redis_conn.smembers("apps:index_beta")}
+        return apps | apps_beta
+    elif repo == "stable":
+        apps = {app[5:] for app in redis_conn.smembers("apps:index")}
+        return apps
+    elif repo == "beta":
+        apps = {app[5:] for app in redis_conn.smembers("apps:index_beta")}
+        return apps
+
+
+def get_developers():
+    return {developer for developer in redis_conn.smembers("developers:index")}

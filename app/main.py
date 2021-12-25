@@ -22,7 +22,7 @@ def startup_event():
 
 @app.post("/update")
 def update():
-    new_apps = apps.load_appstream()
+    new_apps, new_apps_beta = apps.load_appstream()
     summary.update()
     picks.update()
     stats.update()
@@ -31,14 +31,25 @@ def update():
         new_apps_zset = {}
         for appid in new_apps:
             if metadata := db.get_json_key(f"summary:{appid}"):
-                new_apps_zset[appid] = metadata.get("timestamp", 0)
+                if "stable" in metadata:
+                    new_apps_zset[appid] = metadata["stable"].get("timestamp", 0)
         db.redis_conn.zadd("new_apps_zset", new_apps_zset)
+
+    if new_apps_beta:
+        new_apps_beta_zset = {}
+        for appid in new_apps_beta:
+            if metadata := db.get_json_key(f"summary:{appid}"):
+                if "beta" in metadata:
+                    new_apps_beta_zset[appid] = metadata["beta"].get("timestamp", 0)
+        db.redis_conn.zadd("new_apps_beta_zset", new_apps_beta_zset)
 
     get_recently_updated.cache_clear()
 
 
 @app.get("/category/{category}")
-def get_category(category: schemas.Category):
+def get_category(
+    category: schemas.Category,
+):
     ids = apps.get_category(category)
 
     downloads = stats.get_downloads_by_ids(ids)
@@ -53,13 +64,44 @@ def get_category(category: schemas.Category):
     return sorted_ids
 
 
+@app.get("/developer/")
+def get_developers():
+    return db.get_developers()
+
+
+@app.get("/developer/{developer}")
+def get_developer(
+    developer: str,
+    response: Response,
+):
+    ids = apps.get_developer(developer)
+
+    if not ids:
+        response.status_code = 404
+        return response
+
+    downloads = stats.get_downloads_by_ids(ids)
+    sorted_ids = sorted(
+        ids,
+        key=lambda appid: downloads.get(appid, {"downloads_last_month": 0}).get(
+            "downloads_last_month", 0
+        ),
+        reverse=True,
+    )
+
+    return sorted_ids
+
+
 @app.get("/appstream")
-def list_appstream():
-    return apps.list_appstream()
+def list_appstream(type: schemas.AppstreamType = "stable"):
+    return apps.list_appstream(type)
 
 
 @app.get("/appstream/{appid}", status_code=200)
-def get_appstream(appid: str, response: Response):
+def get_appstream(
+    appid: str,
+    response: Response,
+):
     if value := db.get_json_key(f"apps:{appid}"):
         return value
 
@@ -75,8 +117,8 @@ def search(userquery: str):
 @app.get("/collection/recently-updated")
 @app.get("/collection/recently-updated/{limit}")
 @lru_cache()
-def get_recently_updated(limit: int = 100):
-    return apps.get_recently_updated(limit)
+def get_recently_updated(limit: int = 100, type: schemas.AppstreamType = "stable"):
+    return apps.get_recently_updated(limit, type)
 
 
 @app.get("/picks/{pick}")
@@ -98,15 +140,18 @@ def get_popular_days(days: int):
 
 
 @app.get("/feed/recently-updated")
-def get_recently_updated_apps_feed():
+def get_recently_updated_apps_feed(type: schemas.AppstreamType = "stable"):
     return Response(
-        content=feeds.get_recently_updated_apps_feed(), media_type="application/rss+xml"
+        content=feeds.get_recently_updated_apps_feed(type),
+        media_type="application/rss+xml",
     )
 
 
 @app.get("/feed/new")
-def get_new_apps_feed():
-    return Response(content=feeds.get_new_apps_feed(), media_type="application/rss+xml")
+def get_new_apps_feed(type: schemas.AppstreamType = "stable"):
+    return Response(
+        content=feeds.get_new_apps_feed(type), media_type="application/rss+xml"
+    )
 
 
 @app.get("/status", status_code=200)

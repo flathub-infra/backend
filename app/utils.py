@@ -7,11 +7,11 @@ import requests
 from . import config
 
 
-def appstream2dict(reponame: str):
+def appstream2dict(repo_name: str) -> dict[str, object]:
     if config.settings.appstream_repos is not None:
         appstream_path = os.path.join(
             config.settings.appstream_repos,
-            reponame,
+            repo_name,
             "appstream",
             "x86_64",
             "appstream.xml",
@@ -23,7 +23,7 @@ def appstream2dict(reponame: str):
                 appstream = file.read()
     else:
         appstream_url = (
-            f"https://hub.flathub.org/{reponame}/appstream/x86_64/appstream.xml.gz"
+            f"https://hub.flathub.org/{repo_name}/appstream/x86_64/appstream.xml.gz"
         )
         r = requests.get(appstream_url, stream=True)
         appstream = gzip.decompress(r.raw.data)

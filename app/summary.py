@@ -25,7 +25,7 @@ def validate_ref(ref: str, enforce_arch=True):
     if enforce_arch and arch != "x86_64":
         return False
 
-    if branch != "stable":
+    if branch != "stable" and branch != "beta":
         return False
 
     return True
@@ -91,17 +91,38 @@ def parse_metadata(ini: str):
 
 
 def update():
-    summary_dict = defaultdict(lambda: {"arches": []})
-    recently_updated_zset = {}
+    data = get_summary_data("flathub")
+    data_beta = get_summary_data("flathub-beta")
 
+    summary_dict, recently_updated_zset = parse_summary_data(data)
+    summary_dict_beta, recently_updated_beta_zset = parse_summary_data(data_beta)
+    summary = merge_summary(summary_dict_beta, summary_dict)
+
+    db.redis_conn.zadd("recently_updated_zset", recently_updated_zset)
+    db.redis_conn.zadd("recently_updated_beta_zset", recently_updated_beta_zset)
+    db.redis_conn.mset(
+        {f"summary:{appid}": json.dumps(summary[appid]) for appid in summary}
+    )
+
+    return len(recently_updated_zset), len(recently_updated_beta_zset)
+
+
+def get_summary_data(remote_name):
     repo_file = Gio.File.new_for_path(f"{config.settings.flatpak_user_dir}/repo")
     repo = OSTree.Repo.new(repo_file)
     repo.open(None)
 
-    status, summary, signatures = repo.remote_fetch_summary("flathub", None)
+    status, summary, signatures = repo.remote_fetch_summary(remote_name, None)
     data = GLib.Variant.new_from_bytes(
         GLib.VariantType.new(OSTree.SUMMARY_GVARIANT_STRING), summary, True
     )
+
+    return data
+
+
+def parse_summary_data(data):
+    summary_dict = defaultdict(lambda: {"arches": []})
+    recently_updated_zset = {}
 
     refs, metadata = data.unpack()
     xa_cache = metadata["xa.cache"]
@@ -143,9 +164,21 @@ def update():
 
         summary_dict[appid]["arches"].append(arch)
 
-    db.redis_conn.zadd("recently_updated_zset", recently_updated_zset)
-    db.redis_conn.mset(
-        {f"summary:{appid}": json.dumps(summary_dict[appid]) for appid in summary_dict}
-    )
+    return summary_dict, recently_updated_zset
 
-    return len(recently_updated_zset)
+
+def merge_summary(summary_beta, summary_stable):
+    summary = {}
+    for appid in summary_stable:
+        summary[appid] = {"stable": summary_stable[appid]}
+
+    for appid in summary_beta:
+        if appid not in summary:
+            summary[appid] = {"beta": summary_beta[appid]}
+        else:
+            summary[appid] = {
+                "stable": summary_stable[appid],
+                "beta": summary_beta[appid],
+            }
+
+    return summary

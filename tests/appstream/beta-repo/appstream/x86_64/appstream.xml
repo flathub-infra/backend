@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<components version="0.8" origin="flatpak">
+  <component type="desktop">
+    <id>org.sugarlabs.Maze</id>
+    <translation type="gettext">org.sugarlabs.Maze</translation>
+    <name>Maze</name>
+    <summary>A simple maze game, but this is the beta version</summary>
+    <developer_name>Sugar Labs Community</developer_name>
+    <description><p>Good at finding your way out of hard situations? Let&apos;s see! Try to make your way through an increasingly difficult path.</p></description>
+    <icon type="cached" height="64" width="64">org.sugarlabs.Maze.png</icon>
+    <icon type="cached" height="128" width="128">org.sugarlabs.Maze.png</icon>
+    <categories>
+      <category>Game</category>
+    </categories>
+    <kudos>
+      <kudo>HiDpiIcon</kudo>
+    </kudos>
+    <project_license>GPL-3.0-or-later</project_license>
+    <url type="bugtracker">https://github.com/sugarlabs/maze-activity</url>
+    <url type="homepage">https://github.com/sugarlabs/maze-activity</url>
+    <screenshots>
+      <screenshot>
+        <image type="source">https://i.imgur.com/imoTbzP.png</image>
+        <image type="thumbnail" height="351" width="624">https://dl.flathub.org/repo/screenshots/org.sugarlabs.Maze-stable/624x351/org.sugarlabs.Maze-0cf71487936dec29c5b092662909f125.png</image>
+        <image type="thumbnail" height="63" width="112">https://dl.flathub.org/repo/screenshots/org.sugarlabs.Maze-stable/112x63/org.sugarlabs.Maze-0cf71487936dec29c5b092662909f125.png</image>
+        <image type="thumbnail" height="126" width="224">https://dl.flathub.org/repo/screenshots/org.sugarlabs.Maze-stable/224x126/org.sugarlabs.Maze-0cf71487936dec29c5b092662909f125.png</image>
+        <image type="thumbnail" height="423" width="752">https://dl.flathub.org/repo/screenshots/org.sugarlabs.Maze-stable/752x423/org.sugarlabs.Maze-0cf71487936dec29c5b092662909f125.png</image>
+      </screenshot>
+      <screenshot type="default">
+        <image type="source">https://i.imgur.com/GO11pbh.png</image>
+        <image type="thumbnail" height="351" width="624">https://dl.flathub.org/repo/screenshots/org.sugarlabs.Maze-stable/624x351/org.sugarlabs.Maze-4308958995b5f213eac85c7053e01a33.png</image>
+        <image type="thumbnail" height="63" width="112">https://dl.flathub.org/repo/screenshots/org.sugarlabs.Maze-stable/112x63/org.sugarlabs.Maze-4308958995b5f213eac85c7053e01a33.png</image>
+        <image type="thumbnail" height="126" width="224">https://dl.flathub.org/repo/screenshots/org.sugarlabs.Maze-stable/224x126/org.sugarlabs.Maze-4308958995b5f213eac85c7053e01a33.png</image>
+        <image type="thumbnail" height="423" width="752">https://dl.flathub.org/repo/screenshots/org.sugarlabs.Maze-stable/752x423/org.sugarlabs.Maze-4308958995b5f213eac85c7053e01a33.png</image>
+      </screenshot>
+      <screenshot>
+        <image type="source">https://i.imgur.com/RH1koq6.png</image>
+        <image type="thumbnail" height="351" width="624">https://dl.flathub.org/repo/screenshots/org.sugarlabs.Maze-stable/624x351/org.sugarlabs.Maze-5d288daae5069cde2ffe86ab4a9285a7.png</image>
+        <image type="thumbnail" height="63" width="112">https://dl.flathub.org/repo/screenshots/org.sugarlabs.Maze-stable/112x63/org.sugarlabs.Maze-5d288daae5069cde2ffe86ab4a9285a7.png</image>
+        <image type="thumbnail" height="126" width="224">https://dl.flathub.org/repo/screenshots/org.sugarlabs.Maze-stable/224x126/org.sugarlabs.Maze-5d288daae5069cde2ffe86ab4a9285a7.png</image>
+        <image type="thumbnail" height="423" width="752">https://dl.flathub.org/repo/screenshots/org.sugarlabs.Maze-stable/752x423/org.sugarlabs.Maze-5d288daae5069cde2ffe86ab4a9285a7.png</image>
+      </screenshot>
+    </screenshots>
+    <content_rating type="oars-1.1"/>
+    <releases>
+      <release timestamp="1582070400" version="30"/>
+    </releases>
+    <launchable type="desktop-id">org.sugarlabs.Maze.desktop</launchable>
+    <languages>
+      <lang percentage="100">ach</lang>
+      <lang percentage="100">am</lang>
+      <lang percentage="100">an</lang>
+      <lang percentage="40">ar</lang>
+      <lang percentage="100">ayc</lang>
+      <lang percentage="40">aym</lang>
+      <lang percentage="100">ca</lang>
+      <lang percentage="100">cs</lang>
+      <lang percentage="100">da</lang>
+      <lang percentage="100">de</lang>
+      <lang percentage="100">el</lang>
+      <lang percentage="100">en</lang>
+      <lang percentage="100">en_GB</lang>
+      <lang percentage="100">en_US</lang>
+      <lang percentage="100">es</lang>
+      <lang percentage="100">fa</lang>
+      <lang percentage="40">fi</lang>
+      <lang percentage="100">fr</lang>
+      <lang percentage="100">gn</lang>
+      <lang percentage="100">gug</lang>
+      <lang percentage="100">he</lang>
+      <lang percentage="100">hi</lang>
+      <lang percentage="100">hu</lang>
+      <lang percentage="40">hus</lang>
+      <lang percentage="100">hy</lang>
+      <lang percentage="100">id</lang>
+      <lang percentage="100">it</lang>
+      <lang percentage="40">ja</lang>
+      <lang percentage="40">kab</lang>
+      <lang percentage="40">km</lang>
+      <lang percentage="80">ko</lang>
+      <lang percentage="100">lt</lang>
+      <lang percentage="40">mg</lang>
+      <lang percentage="100">mi</lang>
+      <lang percentage="100">ml</lang>
+      <lang percentage="40">mn</lang>
+      <lang percentage="100">ms</lang>
+      <lang percentage="100">nah</lang>
+      <lang percentage="100">ne</lang>
+      <lang percentage="100">nl</lang>
+      <lang percentage="100">pap</lang>
+      <lang percentage="100">pbs</lang>
+      <lang percentage="100">pl</lang>
+      <lang percentage="100">pt</lang>
+      <lang percentage="100">pt_BR</lang>
+      <lang percentage="100">ro</lang>
+      <lang percentage="100">ru</lang>
+      <lang percentage="100">sk</lang>
+      <lang percentage="40">sl</lang>
+      <lang percentage="100">son</lang>
+      <lang percentage="100">sq</lang>
+      <lang percentage="40">sr</lang>
+      <lang percentage="100">sv</lang>
+      <lang percentage="40">sw</lang>
+      <lang percentage="40">ta</lang>
+      <lang percentage="60">te</lang>
+      <lang percentage="100">th</lang>
+      <lang percentage="100">uk</lang>
+      <lang percentage="40">vi</lang>
+      <lang percentage="100">zh_CN</lang>
+      <lang percentage="100">zh_TW</lang>
+    </languages>
+    <bundle type="flatpak" runtime="org.gnome.Platform/x86_64/3.36" sdk="org.gnome.Sdk/x86_64/3.36">app/org.sugarlabs.Maze/x86_64/stable</bundle>
+  </component>
+  <component type="desktop">
+    <id>com.only.in.beta.Repo</id>
+    <translation type="gettext">com.only.in.beta.Repo</translation>
+    <name>Beta app</name>
+    <summary>A simple beta test app</summary>
+    <developer_name>Developer</developer_name>
+    <description><p>Developers, Developers, Developers, Developers</p></description>
+    <icon type="cached" height="64" width="64">com.only.in.beta.Repo.png</icon>
+    <icon type="cached" height="128" width="128">com.only.in.beta.Repo.png</icon>
+    <categories>
+      <category>Game</category>
+    </categories>
+    <kudos>
+      <kudo>HiDpiIcon</kudo>
+    </kudos>
+    <project_license>GPL-3.0-or-later</project_license>
+    <screenshots>
+      <screenshot>
+        <image type="source">https://i.imgur.com/imoTbzP.png</image>
+        <image type="thumbnail" height="351" width="624">https://dl.flathub.org/repo/screenshots/com.only.in.beta.Repo-stable/624x351/com.only.in.beta.Repo-0cf71487936dec29c5b092662909f125.png</image>
+        <image type="thumbnail" height="63" width="112">https://dl.flathub.org/repo/screenshots/com.only.in.beta.Repo-stable/112x63/com.only.in.beta.Repo-0cf71487936dec29c5b092662909f125.png</image>
+        <image type="thumbnail" height="126" width="224">https://dl.flathub.org/repo/screenshots/com.only.in.beta.Repo-stable/224x126/com.only.in.beta.Repo-0cf71487936dec29c5b092662909f125.png</image>
+        <image type="thumbnail" height="423" width="752">https://dl.flathub.org/repo/screenshots/com.only.in.beta.Repo-stable/752x423/com.only.in.beta.Repo-0cf71487936dec29c5b092662909f125.png</image>
+      </screenshot>
+      <screenshot type="default">
+        <image type="source">https://i.imgur.com/GO11pbh.png</image>
+        <image type="thumbnail" height="351" width="624">https://dl.flathub.org/repo/screenshots/com.only.in.beta.Repo-stable/624x351/com.only.in.beta.Repo-4308958995b5f213eac85c7053e01a33.png</image>
+        <image type="thumbnail" height="63" width="112">https://dl.flathub.org/repo/screenshots/com.only.in.beta.Repo-stable/112x63/com.only.in.beta.Repo-4308958995b5f213eac85c7053e01a33.png</image>
+        <image type="thumbnail" height="126" width="224">https://dl.flathub.org/repo/screenshots/com.only.in.beta.Repo-stable/224x126/com.only.in.beta.Repo-4308958995b5f213eac85c7053e01a33.png</image>
+        <image type="thumbnail" height="423" width="752">https://dl.flathub.org/repo/screenshots/com.only.in.beta.Repo-stable/752x423/com.only.in.beta.Repo-4308958995b5f213eac85c7053e01a33.png</image>
+      </screenshot>
+      <screenshot>
+        <image type="source">https://i.imgur.com/RH1koq6.png</image>
+        <image type="thumbnail" height="351" width="624">https://dl.flathub.org/repo/screenshots/com.only.in.beta.Repo-stable/624x351/com.only.in.beta.Repo-5d288daae5069cde2ffe86ab4a9285a7.png</image>
+        <image type="thumbnail" height="63" width="112">https://dl.flathub.org/repo/screenshots/com.only.in.beta.Repo-stable/112x63/com.only.in.beta.Repo-5d288daae5069cde2ffe86ab4a9285a7.png</image>
+        <image type="thumbnail" height="126" width="224">https://dl.flathub.org/repo/screenshots/com.only.in.beta.Repo-stable/224x126/com.only.in.beta.Repo-5d288daae5069cde2ffe86ab4a9285a7.png</image>
+        <image type="thumbnail" height="423" width="752">https://dl.flathub.org/repo/screenshots/com.only.in.beta.Repo-stable/752x423/com.only.in.beta.Repo-5d288daae5069cde2ffe86ab4a9285a7.png</image>
+      </screenshot>
+    </screenshots>
+    <content_rating type="oars-1.1"/>
+    <releases>
+      <release timestamp="1582070400" version="30"/>
+    </releases>
+    <launchable type="desktop-id">com.only.in.beta.Repo.desktop</launchable>
+    <languages>
+      <lang percentage="100">ach</lang>
+      <lang percentage="100">am</lang>
+      <lang percentage="100">an</lang>
+      <lang percentage="40">ar</lang>
+      <lang percentage="100">ayc</lang>
+      <lang percentage="40">aym</lang>
+      <lang percentage="100">ca</lang>
+      <lang percentage="100">cs</lang>
+      <lang percentage="100">da</lang>
+      <lang percentage="100">de</lang>
+      <lang percentage="100">el</lang>
+      <lang percentage="100">en</lang>
+      <lang percentage="100">en_GB</lang>
+      <lang percentage="100">en_US</lang>
+      <lang percentage="100">es</lang>
+      <lang percentage="100">fa</lang>
+      <lang percentage="40">fi</lang>
+      <lang percentage="100">fr</lang>
+      <lang percentage="100">gn</lang>
+      <lang percentage="100">gug</lang>
+      <lang percentage="100">he</lang>
+      <lang percentage="100">hi</lang>
+      <lang percentage="100">hu</lang>
+      <lang percentage="40">hus</lang>
+      <lang percentage="100">hy</lang>
+      <lang percentage="100">id</lang>
+      <lang percentage="100">it</lang>
+      <lang percentage="40">ja</lang>
+      <lang percentage="40">kab</lang>
+      <lang percentage="40">km</lang>
+      <lang percentage="80">ko</lang>
+      <lang percentage="100">lt</lang>
+      <lang percentage="40">mg</lang>
+      <lang percentage="100">mi</lang>
+      <lang percentage="100">ml</lang>
+      <lang percentage="40">mn</lang>
+      <lang percentage="100">ms</lang>
+      <lang percentage="100">nah</lang>
+      <lang percentage="100">ne</lang>
+      <lang percentage="100">nl</lang>
+      <lang percentage="100">pap</lang>
+      <lang percentage="100">pbs</lang>
+      <lang percentage="100">pl</lang>
+      <lang percentage="100">pt</lang>
+      <lang percentage="100">pt_BR</lang>
+      <lang percentage="100">ro</lang>
+      <lang percentage="100">ru</lang>
+      <lang percentage="100">sk</lang>
+      <lang percentage="40">sl</lang>
+      <lang percentage="100">son</lang>
+      <lang percentage="100">sq</lang>
+      <lang percentage="40">sr</lang>
+      <lang percentage="100">sv</lang>
+      <lang percentage="40">sw</lang>
+      <lang percentage="40">ta</lang>
+      <lang percentage="60">te</lang>
+      <lang percentage="100">th</lang>
+      <lang percentage="100">uk</lang>
+      <lang percentage="40">vi</lang>
+      <lang percentage="100">zh_CN</lang>
+      <lang percentage="100">zh_TW</lang>
+    </languages>
+    <bundle type="flatpak" runtime="org.gnome.Platform/x86_64/3.36" sdk="org.gnome.Sdk/x86_64/3.36">app/com.only.in.beta.Repo/x86_64/stable</bundle>
+  </component>
+</components>

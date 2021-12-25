@@ -14,3 +14,9 @@ class Category(str, Enum):
     Science = "Science"
     System = "System"
     Utility = "Utility"
+
+
+class AppstreamType(str, Enum):
+    Stable = "stable"
+    Beta = "beta"
+    Stable_And_Beta = "stable_and_beta"
