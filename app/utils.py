@@ -1,6 +1,8 @@
 import gzip
+import io
 import os
 
+import blurhash
 import requests
 from lxml import etree
 
@@ -62,6 +64,21 @@ def appstream2dict(reponame: str):
                         width = image.attrib.get("width")
                         height = image.attrib.get("height")
                         attrs[f"{width}x{height}"] = image.text
+
+                # find smallest image
+                if not attrs:
+                    continue
+                smallest = min(attrs, key=lambda k: int(k.split("x")[0]))
+
+                # download smallest image and blurhash it
+                if smallest is not None:
+                    res = requests.get(attrs[smallest], stream=True)
+                    if res.status_code == 200:
+                        buffer = io.BytesIO(res.raw.data)
+
+                        attrs["blurhash"] = blurhash.encode(
+                            buffer, x_components=6, y_components=4
+                        )
 
                 if screenshot.attrib.get("type") == "default":
                     app["screenshots"].insert(0, attrs.copy())
