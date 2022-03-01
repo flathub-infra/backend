@@ -1,3 +1,4 @@
+from collections import defaultdict
 from functools import lru_cache
 
 import sentry_sdk
@@ -117,6 +118,21 @@ def get_developer(
             "downloads_last_month", 0
         ),
         reverse=True,
+    )
+
+    return sorted_ids
+
+
+@app.get("/addon/{appid}")
+def get_addons(appid: str):
+    ids = apps.get_addons(appid)
+
+    addon_appstreams = defaultdict()
+    for addonid in ids:
+        addon_appstreams[addonid] = db.get_json_key(f"apps:{addonid}")
+    sorted_ids = sorted(
+        ids,
+        key=lambda appid: addon_appstreams[appid].get("name", "Unknown"),
     )
 
     return sorted_ids

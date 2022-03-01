@@ -51,6 +51,9 @@ def load_appstream():
                 p.sadd("types:index", type)
                 p.sadd(f"types:{type}", redis_key)
 
+            if extends := apps[appid].get("extends"):
+                p.sadd(f"addons:{extends}", redis_key)
+
             if categories := apps[appid].get("categories"):
                 for category in categories:
                     p.sadd("categories:index", category)
@@ -62,6 +65,7 @@ def load_appstream():
                 f"fts:{appid}",
                 f"summary:{appid}",
                 f"app_stats:{appid}",
+                f"addons:{appid}",
             )
             db.redis_search.delete_document(f"fts:{appid}")
 
@@ -99,6 +103,16 @@ def get_category(category: str):
 def get_developer(developer: str):
     if index := db.redis_conn.smembers(f"developers:{developer}"):
         return [appid.removeprefix("apps:") for appid in index]
+    else:
+        return []
+
+
+def get_addons(appid: str):
+    if index := db.redis_conn.smembers(f"addons:{appid}"):
+        json_appdata = db.redis_conn.mget(index)
+        appdata = [json.loads(app) for app in json_appdata]
+
+        return [(app["id"]) for app in appdata]
     else:
         return []
 
