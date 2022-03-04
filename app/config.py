@@ -36,6 +36,7 @@ class Settings(BaseSettings):
     google_client_secret: str = "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"
     google_return_url: str = "http://localhost:3000/login/google"
     cors_origins: str = "http://localhost:3000"
+    flat_manager_secret: str = "c2VjcmV0"
 
 
 settings = Settings()

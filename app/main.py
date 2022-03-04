@@ -1,5 +1,9 @@
+import base64
+from datetime import datetime, timedelta
 from functools import lru_cache
+from typing import List
 
+import jwt
 import sentry_sdk
 from fastapi import FastAPI, Response
 from fastapi.middleware.cors import CORSMiddleware
@@ -197,6 +201,27 @@ def get_summary(appid: str, response: Response):
 
     response.status_code = 404
     return None
+
+
+@app.post("/generate-download-token", status_code=200)
+def get_download_token(appids: List[str]):
+    """Generates a download token for the given app IDs."""
+
+    # TODO: Check the user has rights to download the given app IDs!
+
+    encoded = jwt.encode(
+        {
+            "sub": "download",
+            "exp": datetime.utcnow() + timedelta(hours=24),
+            "prefixes": appids,
+        },
+        base64.b64decode(config.settings.flat_manager_secret),
+        algorithm="HS256",
+    )
+
+    return {
+        "token": encoded,
+    }
 
 
 def sort_ids_by_downloads(ids):
