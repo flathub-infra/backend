@@ -168,6 +168,18 @@ def get_downloads_by_ids(ids: List[str]):
     return result
 
 
+def get_total_downloads_by_ids(ids: List[str]):
+    result = defaultdict()
+    for app_id in ids:
+        if not _is_app(app_id):
+            continue
+        app_stats = db.get_json_key(f"app_stats:{app_id}")
+        if app_stats is None:
+            continue
+        result[app_id] = app_stats["downloads_total"]
+    return result
+
+
 def get_popular(days: Optional[int]):
     edate = datetime.date.today()
 

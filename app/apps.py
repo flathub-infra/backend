@@ -3,7 +3,7 @@ import re
 
 from app import schemas
 
-from . import db, utils
+from . import db, stats, utils
 
 
 def load_appstream():
@@ -110,17 +110,18 @@ def search(query: str):
     if results := db.search(query):
         appids = tuple(doc_id.replace("fts", "apps") for doc_id in results)
         apps = [json.loads(x) for x in db.redis_conn.mget(appids)]
-
         ret = []
+        downloadid = []
         for app in apps:
+            downloadid.append(app["id"])
+            downloads = stats.get_total_downloads_by_ids(downloadid)
             entry = {
                 "id": app["id"],
                 "name": app["name"],
                 "summary": app["summary"],
                 "icon": app.get("icon"),
+                "downloads": downloads.get(app["id"]),
             }
             ret.append(entry)
-
-        return ret
-
+        return sorted(ret, key=lambda entry: entry["downloads"], reverse=True)
     return []
