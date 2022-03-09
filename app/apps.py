@@ -111,10 +111,8 @@ def search(query: str):
         appids = tuple(doc_id.replace("fts", "apps") for doc_id in results)
         apps = [json.loads(x) for x in db.redis_conn.mget(appids)]
         ret = []
-        downloadid = []
         for app in apps:
-            downloadid.append(app["id"])
-            downloads = stats.get_total_downloads_by_ids(downloadid)
+            downloads = stats.get_total_downloads_by_ids([app["id"]])
             entry = {
                 "id": app["id"],
                 "name": app["name"],
