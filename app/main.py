@@ -82,7 +82,7 @@ def get_category(
 
     ids = apps.get_category(category)
 
-    sorted_ids = sort_ids_by_downloads(ids)
+    sorted_ids = sort_ids_by_installs(ids)
 
     if page is None:
         return sorted_ids
@@ -106,7 +106,7 @@ def get_developer(
         response.status_code = 404
         return response
 
-    sorted_ids = sort_ids_by_downloads(ids)
+    sorted_ids = sort_ids_by_installs(ids)
 
     return sorted_ids
 
@@ -183,7 +183,7 @@ def get_stats(response: Response):
 
 @app.get("/stats/{appid}", status_code=200)
 def get_stats_for_app(appid: str, response: Response):
-    if value := stats.get_downloads_by_ids([appid]).get(appid, None):
+    if value := stats.get_installs_by_ids([appid]).get(appid, None):
         return value
 
     response.status_code = 404
@@ -199,15 +199,15 @@ def get_summary(appid: str, response: Response):
     return None
 
 
-def sort_ids_by_downloads(ids):
+def sort_ids_by_installs(ids):
     if len(ids) <= 1:
         return ids
 
-    downloads = stats.get_downloads_by_ids(ids)
+    installs = stats.get_installs_by_ids(ids)
     sorted_ids = sorted(
         ids,
-        key=lambda appid: downloads.get(appid, {"downloads_last_month": 0}).get(
-            "downloads_last_month", 0
+        key=lambda appid: installs.get(appid, {"installs_last_month": 0}).get(
+            "installs_last_month", 0
         ),
         reverse=True,
     )
