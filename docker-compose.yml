@@ -6,6 +6,11 @@ services:
     ports:
       - "6379:6379"
 
+  meilisearch:
+    image: docker.io/getmeili/meilisearch:latest
+    ports:
+      - "7700:7700"
+
   backend:
     build:
       dockerfile: Dockerfile
@@ -20,6 +25,7 @@ services:
     depends_on:
       - redis
       - db
+      - meilisearch
     volumes:
       - /var/lib/flatpak
       - .:/app

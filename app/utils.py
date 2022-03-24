@@ -2,11 +2,14 @@ import gzip
 import hashlib
 import json
 import os
+import re
 
 import requests
 from lxml import etree
 
 from . import config
+
+clean_id_re = re.compile("[^a-zA-Z0-9_-]+")
 
 
 class Hasher:
@@ -236,3 +239,7 @@ def get_appids(path):
             return json.load(file_)
     except IOError:
         return []
+
+
+def get_clean_app_id(appid: str):
+    return re.sub(clean_id_re, "_", appid)

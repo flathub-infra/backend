@@ -63,4 +63,4 @@ jobs:
         run: |
           docker compose up -d
           docker exec backend-backend-1 pip3 install pytest
-          docker exec backend-backend-1 python3 -m pytest tests/main.py
+          docker exec backend-backend-1 python3 -m pytest -vv tests/main.py
